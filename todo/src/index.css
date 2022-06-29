@@ -1,3 +1,7 @@
+body, input, button {
+  font:16px Arial;
+}
+
 * {
   box-sizing: border-box;
 }
