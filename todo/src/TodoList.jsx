@@ -6,7 +6,11 @@ function TodoList(props) {
             props.todos.map( (el,i) => (
                 <Todo 
                     key={`todo_${i}`}
-                    text={el.text} />
+                    text={el.text}
+                    id={el.id}
+                    done={el.done}
+                    toggleDone={props.toggleDone} 
+                />
             ) )
         }
     </ul>)

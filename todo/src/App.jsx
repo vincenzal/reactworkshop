@@ -10,10 +10,19 @@ function App() {
     {text:'Aufgabe2', done:false, id:2}
   ]);
 
+  const toggleDone = (id) => {
+    console.log( id );
+    const updatedTodos = todos.map( (el,i)=>(
+      id===el.id?{...el,done:!el.done} : el
+    ))
+   
+    setTodos( updatedTodos );
+  }
+
   return (
     <div className="todoliste">
       <NewTodo />
-      <TodoList todos={todos}/>
+      <TodoList todos={todos} toggleDone={toggleDone} />
     </div>
   );
 }
