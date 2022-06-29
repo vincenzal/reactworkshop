@@ -1,8 +1,12 @@
 console.log( 'Hello Node' );
 
-const fs = require( 'fs' );
-const express = require( 'express' );
+//const fs = require( 'fs' );
+//const express = require( 'express' );
+import fs from 'fs';
+import express from 'express';
+import hello from './meinModule.js';
 
+console.log( hello() );
 
 let app = express();
 let server = app.listen( 5001, ()=>{
@@ -43,7 +47,7 @@ let pro = new Promise( (resolve,reject) => {
 
 pro.then( (data)=>{
     console.log( 'mein Promise', JSON.parse( data) );
-}).catch( (err)={
+}).catch( (err)=>{
 
 })
 
