@@ -1,25 +1,32 @@
 import logo from './logo.svg';
 import './App.css';
 import Meins from './Meins';
+import {useState} from 'react';
 
 function App() {
+  //let counter = 0;
+
+  const [counter,setCounter ] = useState(0);
+
+  const clickHandler = (e,i)=>{
+    e.preventDefault();
+    //counter++;
+    setCounter( counter+i ); // async
+    console.log( counter );
+  }
+
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <Meins
           title={<span>hello</span>}
         >
           <span>Text für Komponente</span>
         </Meins>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div id="zahl">Counter: {counter}</div>
+        <button id="btn" onClick={(e)=>{clickHandler(e,1)}}>+1</button>
+        <button id="btn2" onClick={ event=>{ clickHandler(event,2) } }>+2</button>
         <Meins
         
         ></Meins>
