@@ -1,6 +1,6 @@
-function Todo() {
+function Todo(props) {
     return (<li>
-        Testaufgabe
+        {props.text}
         <span className="close">&#x00D7;</span>
     </li>)
 }

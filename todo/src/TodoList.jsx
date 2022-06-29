@@ -1,8 +1,14 @@
 import Todo from "./Todo";
 
-function TodoList() {
+function TodoList(props) {
     return (<ul id="myUL">
-        <Todo />
+        {
+            props.todos.map( (el,i) => (
+                <Todo 
+                    key={`todo_${i}`}
+                    text={el.text} />
+            ) )
+        }
     </ul>)
 }
 
