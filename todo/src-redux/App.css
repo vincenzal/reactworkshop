@@ -1,0 +1,8 @@
+* {
+  box-sizing: border-box;
+}
+
+.todoliste {
+  margin:50px auto;
+  max-width:500px;
+}

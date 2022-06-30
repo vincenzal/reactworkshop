@@ -2,13 +2,23 @@ import NewTodo from './NewTodo';
 import TodoList from './TodoList';
 import './App.css';
 import {useState,useEffect} from 'react';
+import {v4} from 'uuid';
 
 //https://www.w3schools.com/howto/howto_js_todolist.asp
 function App() {
-  const [todos,setTodos] = useState([
-    {text:'Aufgabe1', done:false, id:1},
-    {text:'Aufgabe2', done:false, id:2}
-  ]);
+  const [todos,setTodos] = useState([]);
+
+  useEffect(()=>{
+    let savedTodos = localStorage.getItem( 'mytodos' );
+    if ( savedTodos ) {
+      setTodos( JSON.parse( savedTodos ));
+    }
+  },[]);
+
+  const updateStorage = (todos) => {
+    setTodos(todos);
+    localStorage.setItem( 'mytodos', JSON.stringify( todos ) )
+  }
 
   const toggleDone = (id) => {
     console.log( id );
@@ -16,13 +26,36 @@ function App() {
       id===el.id?{...el,done:!el.done} : el
     ))
    
-    setTodos( updatedTodos );
+    updateStorage( updatedTodos );
+  }
+
+  const todoDelete = (e,id) => {
+    e.stopPropagation();
+    console.log( 'delete', id);
+    const updatedTodos = todos.filter( (el,i)=>el.id!=id);
+   
+    updateStorage( updatedTodos );
+
+  }
+
+  const addTodo = ( newTodoText ) => {
+    //console.log( newTodo );
+    let newTodo = {text:newTodoText, done:false, id:v4()};
+    
+    updateStorage([...todos,newTodo]);
+
   }
 
   return (
     <div className="todoliste">
-      <NewTodo />
-      <TodoList todos={todos} toggleDone={toggleDone} />
+      <NewTodo 
+        addTodo={addTodo}
+      />
+      <TodoList 
+        todos={todos} 
+        toggleDone={toggleDone} 
+        todoDelete={todoDelete}
+      />
     </div>
   );
 }
